@@ -57,7 +57,7 @@ const decorateResponse = function(response) {
     });
   });
   store.setVideos(videos); // update the store in store.js
-  render(); // render
+  videoList.render(); // render
 };
 
 // TASK:
@@ -87,11 +87,11 @@ const decorateResponse = function(response) {
 // 2. Map through `store.videos`, sending each `video` through your `generateVideoItemHtml`
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
-const render = function() {
-  let html = '';
-  store.videos.forEach(video => html += videoList.generateListItem(video));
-  $('.results').html(html);
-};
+// const render = function() {
+//   let html = '';
+//   store.videos.forEach(video => html += videoList.generateListItem(video));
+//   $('.results').html(html);
+// };
 
 // TASK:
 // 1. Create a `handleFormSubmit` function that adds an event listener to the form

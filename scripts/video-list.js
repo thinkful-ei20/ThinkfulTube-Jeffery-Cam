@@ -11,7 +11,14 @@ const videoList = (function(){
   `;
   }
 
+  function render() {
+    let html = '';
+    store.videos.forEach(video => html += videoList.generateListItem(video));
+    $('.results').html(html);
+  }
+
   return {
     generateListItem,
+    render,
   };
 }());
