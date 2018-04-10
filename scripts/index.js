@@ -55,6 +55,7 @@ const decorateResponse = function(response) {
     });
   });
   addVideosToStore(videos);
+  render();
 };
 
 // TASK:
@@ -62,7 +63,12 @@ const decorateResponse = function(response) {
 // 2. Using the object, return an HTML string containing all the expected data
 // TEST IT!
 const generateVideoItemHtml = function(video) {
-
+  return `
+    <li>
+    <img src="${video.thumbnail}" alt="${video.title}">
+    <h3>${video.title}</h3>
+    </li>
+  `;
 };
 
 // TASK:
@@ -70,9 +76,7 @@ const generateVideoItemHtml = function(video) {
 // objects and sets the array as the value held in store.items
 // TEST IT!
 const addVideosToStore = function(videos) {
-  console.log(store.videos);
   store.videos = videos;
-  console.log(store.videos);
 };
 
 // TASK:
@@ -81,7 +85,9 @@ const addVideosToStore = function(videos) {
 // 3. Add your array of DOM elements to the appropriate DOM element
 // TEST IT!
 const render = function() {
-
+  let html = '';
+  store.videos.forEach(video => html += generateVideoItemHtml(video));
+  $(".results").html(html);
 };
 
 // TASK:
