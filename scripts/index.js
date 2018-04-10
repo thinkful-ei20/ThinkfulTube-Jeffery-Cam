@@ -1,6 +1,5 @@
 'use strict';
-/*global $*/
-const API_KEY = 'AIzaSyDaLzcQM6Go8Dy9zk4imc6MFowc6BMpeps';
+/*global $, store*/
 
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
@@ -14,9 +13,10 @@ const API_KEY = 'AIzaSyDaLzcQM6Go8Dy9zk4imc6MFowc6BMpeps';
   }
 
 */
-const store = {
-  videos: []
-};
+// REFACTORED INTO `store.js`
+// const store = {
+//   videos: []
+// };
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
@@ -27,15 +27,16 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 // 2. Use `searchTerm` to construct the right query object based on the Youtube API docs
 // 3. Make a getJSON call using the query object and sending the provided callback in as the last argument
 // TEST IT! Execute this function and console log the results inside the callback.
-const fetchVideos = function(searchTerm, callback) {
-  // initialize the query object with 3 properties, part, key and q
-  const query = {
-    part: 'snippet',
-    key: API_KEY,
-    q: `${searchTerm}`,
-  };
-  $.getJSON(BASE_URL, query, callback);
-};
+// Refactored into api.js
+// const fetchVideos = function(searchTerm, callback) {
+//   // initialize the query object with 3 properties, part, key and q
+//   const query = {
+//     part: 'snippet',
+//     key: API_KEY,
+//     q: `${searchTerm}`,
+//   };
+//   $.getJSON(BASE_URL, query, callback);
+// };
 
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
@@ -55,7 +56,7 @@ const decorateResponse = function(response) {
       thumbnail: item.snippet.thumbnails.default.url,
     });
   });
-  addVideosToStore(videos);
+  store.setVideos(videos); // update the store in store.js
   render(); // render
 };
 
@@ -76,9 +77,9 @@ const generateVideoItemHtml = function(video) {
 // 1. Create a `addVideosToStore` function that receives an array of decorated video 
 // objects and sets the array as the value held in store.items
 // TEST IT!
-const addVideosToStore = function(videos) {
-  store.videos = videos;
-};
+// const addVideosToStore = function(videos) {
+//   store.videos = videos;
+// };
 
 // TASK:
 // 1. Create a `render` function
@@ -109,7 +110,7 @@ const handleFormSubmit = function() {
     const searchTerm = $('#search-term').val(); // capture search input's value
     console.log(searchTerm);
     $('#search-term').val('');  // clear the search input
-    fetchVideos(searchTerm, decorateResponse); // Add them to the store object
+    api.fetchVideos(searchTerm, decorateResponse); // Add them to the store object
   });
 };
 
