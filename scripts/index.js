@@ -108,7 +108,7 @@ const handleFormSubmit = function() {
     event.preventDefault(); // prevent default behavior
     const searchTerm = $('#search-term').val(); // capture search input's value
     console.log(searchTerm);
-    $('#searchTerm').val('');  // clear the search input
+    $('#search-term').val('');  // clear the search input
     fetchVideos(searchTerm, decorateResponse); // Add them to the store object
   });
 };
