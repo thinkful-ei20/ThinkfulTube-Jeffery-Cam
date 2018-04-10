@@ -31,7 +31,7 @@ const fetchVideos = function(searchTerm, callback) {
   // initialize the query object with 3 properties, part, apiKey and q
   const query = {
     part: 'snippet',
-    apiKey: API_KEY,
+    key: API_KEY,
     q: `${searchTerm}`,
   };
   $.getJSON(BASE_URL, query, callback);
@@ -46,7 +46,7 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-
+  console.log(response);
 };
 
 // TASK:
@@ -93,4 +93,7 @@ const handleFormSubmit = function() {
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
+  
+  // TESTS
+  //fetchVideos("batman", decorateResponse);
 });
