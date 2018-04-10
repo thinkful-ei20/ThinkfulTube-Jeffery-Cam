@@ -26,6 +26,19 @@ const videoList = (function(){
     });
   }
 
+  function decorateResponse(response) {
+    const videos = [];
+    response.items.forEach(item => {
+      videos.push({
+        id: item.id.videoId,
+        title: item.snippet.title,
+        thumbnail: item.snippet.thumbnails.default.url,
+      });
+    });
+    store.setVideos(videos); // update the store in store.js
+    render(); // render
+  }
+
   function bindEventListeners() {
     handleFormSubmit();
   }
@@ -34,6 +47,7 @@ const videoList = (function(){
     generateListItem,
     render,
     handleFormSubmit,
+    decorateResponse,
     bindEventListeners,
   };
 }());
