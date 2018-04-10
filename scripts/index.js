@@ -104,20 +104,21 @@ const decorateResponse = function(response) {
 //   f) Inside the callback, add the decorated response into your store using the `addVideosToStore` function
 //   g) Inside the callback, run the `render` function 
 // TEST IT!
-const handleFormSubmit = function() {
-  $('form').on('submit', event => {
-    // console.log('hello from instead handleFormSubmit');
-    event.preventDefault(); // prevent default behavior
-    const searchTerm = $('#search-term').val(); // capture search input's value
-    // console.log(searchTerm);
-    $('#search-term').val('');  // clear the search input
-    api.fetchVideos(searchTerm, decorateResponse); // Add them to the store object
-  });
-};
+// Implemented in video-list.js
+// const handleFormSubmit = function() {
+//   $('form').on('submit', event => {
+//     // console.log('hello from instead handleFormSubmit');
+//     event.preventDefault(); // prevent default behavior
+//     const searchTerm = $('#search-term').val(); // capture search input's value
+//     // console.log(searchTerm);
+//     $('#search-term').val('');  // clear the search input
+//     api.fetchVideos(searchTerm, decorateResponse); // Add them to the store object
+//   });
+// };
 
 // When DOM is ready:
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
-  handleFormSubmit();  
+  videoList.handleFormSubmit();  
 });
