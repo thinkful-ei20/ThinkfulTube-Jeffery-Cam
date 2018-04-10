@@ -46,16 +46,15 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-  console.log(response);
   const videos = [];
   response.items.forEach(item => {
-    videos.push({ 
+    videos.push({
       id: item.id.videoId,
       title: item.snippet.title,
       thumbnail: item.snippet.thumbnails.default.url,
     });
   });
-  console.log(videos);
+  addVideosToStore(videos);
 };
 
 // TASK:
@@ -71,7 +70,9 @@ const generateVideoItemHtml = function(video) {
 // objects and sets the array as the value held in store.items
 // TEST IT!
 const addVideosToStore = function(videos) {
-
+  console.log(store.videos);
+  store.videos = videos;
+  console.log(store.videos);
 };
 
 // TASK:
