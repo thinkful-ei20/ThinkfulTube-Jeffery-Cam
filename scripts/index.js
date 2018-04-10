@@ -46,6 +46,7 @@ const fetchVideos = function(searchTerm, callback) {
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
+  console.log('hello from decorateResponse');
   const videos = [];
   response.items.forEach(item => {
     videos.push({
@@ -55,7 +56,7 @@ const decorateResponse = function(response) {
     });
   });
   addVideosToStore(videos);
-  render();
+  render(); // render
 };
 
 // TASK:
@@ -87,7 +88,7 @@ const addVideosToStore = function(videos) {
 const render = function() {
   let html = '';
   store.videos.forEach(video => html += generateVideoItemHtml(video));
-  $(".results").html(html);
+  $('.results').html(html);
 };
 
 // TASK:
@@ -102,14 +103,19 @@ const render = function() {
 //   g) Inside the callback, run the `render` function 
 // TEST IT!
 const handleFormSubmit = function() {
-  
+  $('form').on('submit', event => {
+    console.log('hello from instead handleFormSubmit');
+    event.preventDefault(); // prevent default behavior
+    const searchTerm = $('#search-term').val(); // capture search input's value
+    console.log(searchTerm);
+    $('#searchTerm').val('');  // clear the search input
+    fetchVideos(searchTerm, decorateResponse); // Add them to the store object
+  });
 };
 
 // When DOM is ready:
 $(function () {
   // TASK:
   // 1. Run `handleFormSubmit` to bind the event listener to the DOM
-  
-  // TESTS
-  fetchVideos('batman', decorateResponse);
+  handleFormSubmit();  
 });
