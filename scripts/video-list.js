@@ -26,9 +26,14 @@ const videoList = (function(){
     });
   }
 
+  function bindEventListeners() {
+    handleFormSubmit();
+  }
+
   return {
     generateListItem,
     render,
     handleFormSubmit,
+    bindEventListeners,
   };
 }());
