@@ -1,6 +1,5 @@
 'use strict';
 /*global $, store*/
-const API_KEY = 'AIzaSyDaLzcQM6Go8Dy9zk4imc6MFowc6BMpeps';
 
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
@@ -28,15 +27,16 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 // 2. Use `searchTerm` to construct the right query object based on the Youtube API docs
 // 3. Make a getJSON call using the query object and sending the provided callback in as the last argument
 // TEST IT! Execute this function and console log the results inside the callback.
-const fetchVideos = function(searchTerm, callback) {
-  // initialize the query object with 3 properties, part, key and q
-  const query = {
-    part: 'snippet',
-    key: API_KEY,
-    q: `${searchTerm}`,
-  };
-  $.getJSON(BASE_URL, query, callback);
-};
+// Refactored into api.js
+// const fetchVideos = function(searchTerm, callback) {
+//   // initialize the query object with 3 properties, part, key and q
+//   const query = {
+//     part: 'snippet',
+//     key: API_KEY,
+//     q: `${searchTerm}`,
+//   };
+//   $.getJSON(BASE_URL, query, callback);
+// };
 
 // TASK:
 // 1. Create a `decorateResponse` function that receives the Youtube API response
@@ -110,7 +110,7 @@ const handleFormSubmit = function() {
     const searchTerm = $('#search-term').val(); // capture search input's value
     console.log(searchTerm);
     $('#search-term').val('');  // clear the search input
-    fetchVideos(searchTerm, decorateResponse); // Add them to the store object
+    api.fetchVideos(searchTerm, decorateResponse); // Add them to the store object
   });
 };
 
