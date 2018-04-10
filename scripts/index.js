@@ -1,5 +1,5 @@
 'use strict';
-/*global $, store*/
+/*global $, store, videoList, api*/
 
 /*
   We want our store to hold a `videos` array of "decorated" objects - i.e. objects that
@@ -20,7 +20,7 @@
 
 // TASK: Add the Youtube Search API Base URL here:
 // Documentation is here: https://developers.google.com/youtube/v3/docs/search/list#usage
-const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
+// const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 // TASK:
 // 1. Create a `fetchVideos` function that receives a `searchTerm` and `callback`
@@ -47,7 +47,7 @@ const BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 // TEST IT! Grab an example API response and send it into the function - make sure
 // you get back the object you want.
 const decorateResponse = function(response) {
-  console.log('hello from decorateResponse');
+  // console.log('hello from decorateResponse');
   const videos = [];
   response.items.forEach(item => {
     videos.push({
@@ -64,14 +64,15 @@ const decorateResponse = function(response) {
 // 1. Create a `generateVideoItemHtml` function that receives the decorated object
 // 2. Using the object, return an HTML string containing all the expected data
 // TEST IT!
-const generateVideoItemHtml = function(video) {
-  return `
-    <li>
-    <img src="${video.thumbnail}" alt="${video.title}">
-    <h3>${video.title}</h3>
-    </li>
-  `;
-};
+// implemented in video-list.js
+// const generateVideoItemHtml = function(video) {
+//   return `
+//     <li>
+//     <img src="${video.thumbnail}" alt="${video.title}">
+//     <h3>${video.title}</h3>
+//     </li>
+//   `;
+// };
 
 // TASK:
 // 1. Create a `addVideosToStore` function that receives an array of decorated video 
@@ -88,7 +89,7 @@ const generateVideoItemHtml = function(video) {
 // TEST IT!
 const render = function() {
   let html = '';
-  store.videos.forEach(video => html += generateVideoItemHtml(video));
+  store.videos.forEach(video => html += videoList.generateListItem(video));
   $('.results').html(html);
 };
 
@@ -105,10 +106,10 @@ const render = function() {
 // TEST IT!
 const handleFormSubmit = function() {
   $('form').on('submit', event => {
-    console.log('hello from instead handleFormSubmit');
+    // console.log('hello from instead handleFormSubmit');
     event.preventDefault(); // prevent default behavior
     const searchTerm = $('#search-term').val(); // capture search input's value
-    console.log(searchTerm);
+    // console.log(searchTerm);
     $('#search-term').val('');  // clear the search input
     api.fetchVideos(searchTerm, decorateResponse); // Add them to the store object
   });
