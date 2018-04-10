@@ -1,5 +1,5 @@
 'use strict';
-/*global $*/
+/*global $, store*/
 const API_KEY = 'AIzaSyDaLzcQM6Go8Dy9zk4imc6MFowc6BMpeps';
 
 /*
@@ -56,7 +56,7 @@ const decorateResponse = function(response) {
       thumbnail: item.snippet.thumbnails.default.url,
     });
   });
-  addVideosToStore(videos);
+  store.setVideos(videos); // update the store in store.js
   render(); // render
 };
 
@@ -77,9 +77,9 @@ const generateVideoItemHtml = function(video) {
 // 1. Create a `addVideosToStore` function that receives an array of decorated video 
 // objects and sets the array as the value held in store.items
 // TEST IT!
-const addVideosToStore = function(videos) {
-  store.videos = videos;
-};
+// const addVideosToStore = function(videos) {
+//   store.videos = videos;
+// };
 
 // TASK:
 // 1. Create a `render` function
